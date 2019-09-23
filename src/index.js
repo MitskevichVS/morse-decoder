@@ -38,7 +38,28 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+  let arrayOfSymbols = [];
+  let answer;
+
+  let auxString = expr.match(/.{1,10}/g);
+
+  auxString.forEach(element => {
+    arrayOfSymbols.push(element);
+  });
+
+  arrayOfSymbols.map((item, index) => {
+    arrayOfSymbols[index] = item.replace(/\W+/g, ' ').replace(/00/g, '').replace(/10/g, '.').replace(/11/g, '-');
+  });
+
+  arrayOfSymbols.forEach((item, index) => {
+    if (item === ' '){
+      return;
+    }
+    arrayOfSymbols[index] = MORSE_TABLE[item];
+  });
+  
+  answer = arrayOfSymbols.join('');
+  return answer;
 }
 
 module.exports = {
